@@ -1,0 +1,4 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_flask_sqlalchemy"]
+}
