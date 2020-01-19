@@ -13,7 +13,7 @@ class Pupil(DB.Model):
     school_id = DB.Column(DB.Integer, DB.ForeignKey('schools.id'))
 
     def __repr__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name} ({self.school.name}, year {self.year})"
 
 
 class SchoolStages(enum.Enum):
