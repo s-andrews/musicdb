@@ -6,7 +6,7 @@ APP = Flask(__name__)
 APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/simon/musicdb.sqlite'
 APP.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-import datamodel
+from datamodel import School, Pupil
 
 
 @APP.route('/')

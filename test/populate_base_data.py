@@ -3,7 +3,7 @@ import sys
 sys.path.append("..")
 
 from musicdb import APP
-from datamodel import DB, School, SchoolStages, Pupil
+from datamodel import DB, School, SchoolStages, Pupil, Instrument, InstrumentFamilies
 
 def populate_database():
 
@@ -50,5 +50,32 @@ def populate_database():
     for pupil in Pupil.query.all():
         print(f"\t {pupil}")
 
-if (__name__ == '__main__'):
+
+    # Add some instruments
+    saxophone = Instrument(name='saxophone', family=InstrumentFamilies.WOODWIND)
+    trombone = Instrument(name='trombone', family=InstrumentFamilies.BRASS)
+    drums = Instrument(name='drum kit', family=InstrumentFamilies.PERCUSSION)
+
+    DB.session.add(saxophone)
+    DB.session.add(trombone)
+    DB.session.add(drums)
+    
+    DB.session.commit()
+
+    # List the instruments we added
+    print('Instruments')
+    for instrument in Instrument.query.all():
+        print(f"\t {instrument}")
+
+
+    # Try adding an instrument to a pupil
+    simon.instruments.append(saxophone)
+
+    DB.session.add(simon)
+
+    DB.session.commit()
+
+    print(simon.instruments.all())
+
+if __name__ == '__main__':
     populate_database()
