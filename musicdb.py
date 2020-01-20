@@ -6,7 +6,7 @@ APP = Flask(__name__)
 APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/simon/musicdb.sqlite'
 APP.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-from datamodel import School, Pupil, PupilInstrument, Instrument
+from datamodel import School, Pupil, PupilInstrument, Instrument, Teacher
 
 
 @APP.route('/')
@@ -35,3 +35,11 @@ def instruments():
     instruments = Instrument.query.all()
 
     return render_template('instruments.html', instruments=instruments, table_title="Instruments")
+
+
+@APP.route('/teachers')
+def teachers():
+
+    teachers = Teacher.query.all()
+
+    return render_template('teachers.html', teachers=teachers, table_title="Teachers")
