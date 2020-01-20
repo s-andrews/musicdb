@@ -68,9 +68,17 @@ def populate_database():
 
     DB.session.add(saxophone)
     DB.session.add(trombone)
+    DB.session.add(trumpet)
     DB.session.add(drums)
     DB.session.add(piano)
     DB.session.add(tuned_percussion)
+    DB.session.add(violin)
+    DB.session.add(viola)
+    DB.session.add(cello)
+    DB.session.add(doublebass)
+
+
+
     
     DB.session.commit()
 
@@ -82,7 +90,7 @@ def populate_database():
 
     # Make some teachers
     sally = Teacher(first_name="Sally", last_name="Gogna", region="Grafham")
-    maria = Teacher(first_name="Maria", last_name="MxElroy", region="Comberton")
+    maria = Teacher(first_name="Maria", last_name="McElroy", region="Comberton")
     mark = Teacher(first_name="Mark", last_name="Aldous", region="Cambridge")
 
     # Try adding an instrument to a pupil
@@ -92,6 +100,7 @@ def populate_database():
     DB.session.add(PupilInstrument(pupil=simon, instrument=piano, grade=1, teacher=maria))
     DB.session.add(PupilInstrument(pupil=simon, instrument=clarinet, grade=6))
     DB.session.add(PupilInstrument(pupil=simon, instrument=flute))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=violin, grade=1))
 
     DB.session.add(PupilInstrument(pupil=emma, instrument=piano, grade=8))
     DB.session.add(PupilInstrument(pupil=emma, instrument=flute, grade=8, teacher=sally))
