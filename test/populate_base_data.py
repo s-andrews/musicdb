@@ -12,8 +12,8 @@ def populate_database():
     DB.create_all()
 
     # Make some schools
-    bottishamS = School(name="Bottisham Secondary",stage=SchoolStages.SECONDARY)
-    bottishamP = School(name="Bottisham Primary",stage=SchoolStages.PRIMARY)
+    bottishams = School(name="Bottisham Secondary",stage=SchoolStages.SECONDARY)
+    bottishamp = School(name="Bottisham Primary",stage=SchoolStages.PRIMARY)
     bulbeck = School(name="Swaffham Bulbeck Primary",stage=SchoolStages.PRIMARY)
     prior = School(name="Swaffham Prior Primary",stage=SchoolStages.PRIMARY)
     burwell = School(name="Burwell Primary",stage=SchoolStages.PRIMARY)
@@ -21,8 +21,8 @@ def populate_database():
     wilbraham = School(name="Great Wilbraham Primary",stage=SchoolStages.PRIMARY)
 
     # Add them to the database
-    DB.session.add(bottishamS)
-    DB.session.add(bottishamP)
+    DB.session.add(bottishams)
+    DB.session.add(bottishamp)
     DB.session.add(bulbeck)
     DB.session.add(prior)
     DB.session.add(burwell)
@@ -38,8 +38,8 @@ def populate_database():
 
 
     # Make some pupils
-    simon = Pupil(first_name='Simon', last_name='Andrews', year=11, school=bottishamS)
-    emma = Pupil(first_name='Emma', last_name='Andrews', year=11, school=bottishamS)
+    simon = Pupil(first_name='Simon', last_name='Andrews', year=11, school=bottishams)
+    emma = Pupil(first_name='Emma', last_name='Andrews', year=11, school=bottishams)
     james = Pupil(first_name='James', last_name='Andrews', year=6, school=bulbeck)
     libby = Pupil(first_name='Libby', last_name='Andrews', year=5, school=bulbeck)
 
@@ -108,7 +108,7 @@ def populate_database():
     DB.session.add(elecguitar)
     DB.session.add(bassguitar)
     DB.session.add(classguitar)
-    
+
     drums = Instrument(name='drum kit', family=InstrumentFamilies.PERCUSSION)
     tuned_percussion = Instrument(name='tuned percussion', family=InstrumentFamilies.PERCUSSION)
 
@@ -122,7 +122,6 @@ def populate_database():
     DB.session.add(piano)
     DB.session.add(organ)
 
-    
     DB.session.commit()
 
     # List the instruments we added
@@ -132,25 +131,41 @@ def populate_database():
 
 
     # Make some teachers
-    sally = Teacher(first_name="Sally", last_name="Gogna", region="Grafham")
-    maria = Teacher(first_name="Maria", last_name="McElroy", region="Comberton")
-    mark = Teacher(first_name="Mark", last_name="Aldous", region="Cambridge")
+    george = Teacher(first_name="George", last_name="Gershwin", region="Grafham")
+    andre = Teacher(first_name="Andre", last_name="Previn", region="Comberton")
+    gene = Teacher(first_name="Gene", last_name="Kruper", region="Cambridge")
+    andre2 = Teacher(first_name="Andre", last_name="Riu", region="Swaffham Prior")
+    louis = Teacher(first_name="Louis", last_name="Armstrong", region="Burwell")
+    charlie = Teacher(first_name="Charlie", last_name="Parker", region="Bottisham")
+    jamesg = Teacher(first_name="James", last_name="Gallway", region="Ely")
+    tommy = Teacher(first_name="Tommy", last_name="Dorsey", region="Great Wilbraham")
+    
+    DB.session.add(george)
+    DB.session.add(andre)
+    DB.session.add(gene)
+    DB.session.add(andre2)
+    DB.session.add(louis)
+    DB.session.add(charlie)
+    DB.session.add(jamesg)
+    DB.session.add(tommy)
+
+    DB.session.commit()
 
     # Try adding an instrument to a pupil
-    DB.session.add(PupilInstrument(pupil=simon, instrument=saxophone, grade=6))
-    DB.session.add(PupilInstrument(pupil=simon, instrument=piano, grade=1, teacher=maria))
-    DB.session.add(PupilInstrument(pupil=simon, instrument=clarinet, grade=6))
-    DB.session.add(PupilInstrument(pupil=simon, instrument=flute))
-    DB.session.add(PupilInstrument(pupil=simon, instrument=violin, grade=1))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=saxophone, grade=6, teacher=charlie))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=piano, grade=1, teacher=andre))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=clarinet, grade=6, teacher=george))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=flute, teacher=jamesg))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=violin, grade=1, teacher=andre2))
 
-    DB.session.add(PupilInstrument(pupil=emma, instrument=piano, grade=8))
-    DB.session.add(PupilInstrument(pupil=emma, instrument=flute, grade=8, teacher=sally))
-    DB.session.add(PupilInstrument(pupil=emma, instrument=tenorhorn, grade=1))
+    DB.session.add(PupilInstrument(pupil=emma, instrument=piano, grade=8, teacher=andre))
+    DB.session.add(PupilInstrument(pupil=emma, instrument=flute, grade=8, teacher=jamesg))
+    DB.session.add(PupilInstrument(pupil=emma, instrument=tenorhorn, grade=1, teacher=louis))
 
-    DB.session.add(PupilInstrument(pupil=libby, instrument=trombone, grade=1))
+    DB.session.add(PupilInstrument(pupil=libby, instrument=trombone, grade=1, teacher=tommy))
 
-    DB.session.add(PupilInstrument(pupil=james, instrument=drums, grade=5, teacher=mark))
-    DB.session.add(PupilInstrument(pupil=james, instrument=tuned_percussion, grade=5, teacher=mark))
+    DB.session.add(PupilInstrument(pupil=james, instrument=drums, grade=5, teacher=gene))
+    DB.session.add(PupilInstrument(pupil=james, instrument=tuned_percussion, grade=5, teacher=gene))
 
 
     DB.session.commit()
