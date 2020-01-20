@@ -1,12 +1,12 @@
 .jumbotron {
-    background-color: #f4511e;
+    background-color: #e91e63;
     color: #ffffff;
-    padding: 100px 25px;
+    padding: 50px 25px;
   }
 
   .navbar {
     margin-bottom: 0;
-    background-color: #f4511e;
+    background-color: #e91e63;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -20,7 +20,7 @@
   }
   
   .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #f4511e !important;
+    color: #e91e63 !important;
     background-color: #fff !important;
   }
   
