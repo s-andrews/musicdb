@@ -18,7 +18,7 @@ def pupils():
 
     pupils = Pupil.query.all()
 
-    return render_template('pupils.html', pupils=pupils)
+    return render_template('pupils.html', pupils=pupils, table_title="Pupils")
 
 
 @APP.route('/schools')
@@ -26,4 +26,4 @@ def schools():
 
     schools = School.query.all()
 
-    return render_template('schools.html', schools=schools)
+    return render_template('schools.html', schools=schools, table_title="Schools")
