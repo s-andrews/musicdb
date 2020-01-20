@@ -48,7 +48,7 @@ class Instrument(DB.Model):
     id = DB.Column(DB.Integer, primary_key=True)
     name = DB.Column(DB.String)
     family = DB.Column(DB.Enum(InstrumentFamilies))
-
+ 
     def __repr__(self):
         return self.name
 

@@ -1,0 +1,22 @@
+{% extends "table.html" %}
+
+{% block tablebody %}
+    <thead>
+        <th>Name</th>
+        <th>Family</th>
+        <th>Players</th>
+    </thead>
+    <tbody>
+        {% for instrument in instruments %}
+        {% if instrument.pupils.all() %}
+        <tr>
+        {% else %}
+        <tr class="warning">
+        {% endif %}
+            <td>{{instrument.name}}</td>
+            <td>{{instrument.family.value}}</td>
+            <td>{{instrument.pupils.all()|length}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>    
+{% endblock %}

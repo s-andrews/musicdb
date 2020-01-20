@@ -84,5 +84,8 @@ def populate_database():
 
     print(simon.instruments.all())
 
+
+    print (saxophone.pupils.all())
+
 if __name__ == '__main__':
     populate_database()
