@@ -43,7 +43,7 @@ class Instrument(DB.Model):
     id = DB.Column(DB.Integer, primary_key=True)
     name = DB.Column(DB.String)
     family = DB.Column(DB.Enum(InstrumentFamilies))
- 
+
     def __repr__(self):
         return self.name
 
@@ -55,7 +55,7 @@ class PupilInstrument(DB.Model):
     insrument_id = DB.Column(DB.Integer, DB.ForeignKey('instruments.id'))
     grade = DB.Column(DB.Integer)
     teacher_id = DB.Column(DB.Integer, DB.ForeignKey('teachers.id'))
-    
+
     pupil = DB.relationship('Pupil',backref='instruments')
     instrument = DB.relationship('Instrument',backref='pupils')
     teacher = DB.relationship('Teacher',backref='pupils')
@@ -70,5 +70,3 @@ class Teacher(DB.Model):
     first_name = DB.Column(DB.String)
     last_name = DB.Column(DB.String)
     region = DB.Column(DB.String)
-
-
