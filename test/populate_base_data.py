@@ -293,7 +293,7 @@ def randomly_populate():
     secondaryschools = School.query.filter_by(stage=SchoolStages.SECONDARY).all()
     instruments = Instrument.query.all()
 
-    for i in range(300):
+    for _ in range(300):
         first_name = ""
         if random.randrange(2):
             first_name = random.choice(boys_names)
