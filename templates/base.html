@@ -39,9 +39,20 @@
 {% endblock %}
 
 {% block header %}
-<div class="jumbotron text-center">
-    <h1>MusicDB</h1>
-    <p>A database of children who play musical instruments</p>
+<div class="jumbotron">
+    <div class="row">
+      <div class="col-md-3 text-center">
+<!--        <img src="{{ url_for('static',filename='images/logo.png') }}"> -->
+      </div>
+      <div class="col-md-6 text-center">
+        <h1>MusicDB</h1>
+        <p>A database of children who play musical instruments</p>
+      </div>
+      <div class="col-md-3 text-center">
+<!--        <img src="{{ url_for('static',filename='images/logo.png') }}"> -->
+      </div>
+
+  </div>
 </div>
 {% endblock %}
 
