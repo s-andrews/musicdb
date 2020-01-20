@@ -66,7 +66,7 @@ def populate_database():
     clarinet = Instrument(name='clarinet', family=InstrumentFamilies.WOODWIND)
     oboe = Instrument(name='oboe', family=InstrumentFamilies.WOODWIND)
     bassoon = Instrument(name='bassoon', family=InstrumentFamilies.WOODWIND)
-    
+
     DB.session.add(saxophone)
     DB.session.add(flute)
     DB.session.add(clarinet)
@@ -139,7 +139,7 @@ def populate_database():
     charlie = Teacher(first_name="Charlie", last_name="Parker", region="Bottisham")
     jamesg = Teacher(first_name="James", last_name="Gallway", region="Ely")
     tommy = Teacher(first_name="Tommy", last_name="Dorsey", region="Great Wilbraham")
-    
+
     DB.session.add(george)
     DB.session.add(andre)
     DB.session.add(gene)
