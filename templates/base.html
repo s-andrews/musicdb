@@ -1,25 +1,79 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>MusicDB</title>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='musicdb.css') }}">
 </head>
 <body>
 
 {% block header %}
-<div id="header">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">MusicDB</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('index') }}">Pupils</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Schools</a></li>
+          <li><a href="#">Teachers</a></li>
+          <li><a href="#">Instruments</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav> 
+<div class="jumbotron text-center">
     <h1>MusicDB</h1>
     <p>A database of children who play musical instruments</p>
 </div>
 {% endblock %}
 
+<div class="container-fluid">
 {% block main %}
-<div id="main">
-    <p>Welcome to the MusicDB database</p>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <h2>Welcome to the MusicDB database</h2>
 
+        <p>
+            This system tracks the progress of children who are taking instrumental lessons as they
+            move from primary to secondary education.  It provides information on the availability of
+            players for existing or new ensembles, and allows schools to plan for the players who will
+            be arriving in future years.
+        </p>
+
+        <p>
+            This system can also be used to monitor the instrumental teaching activity in primary schools
+            and identify opportunities for new teachers to approach schools to broaden the range of
+            instrumental teaching they offer.
+        </p>
+    </div>
+    <div class="col-sm-2"></div>
 </div>
 
 {% endblock %}
+</div>
 
+{% block footer %}
+<footer class="container-fluid text-center">
+    <a href="{{ url_for('index') }}" title="Home">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>MusicDB database <a href="https://github.com/s-andrews/musicdb" title="Github page">Visit MusicDB github repository</a></p>
+  </footer>
+{% endblock %}
 
 </body>
 
