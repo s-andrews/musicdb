@@ -307,18 +307,18 @@ def randomly_populate():
             school = random.choice(secondaryschools)
         else:
             school = random.choice(primaryschools)
-       
+
 
         year = 0
 
         if school.stage == SchoolStages.PRIMARY:
-            year = random.choice(range(3,6))
+            year = random.choice(range(3, 6))
         else:
-            year = random.choice(range(7,11))
+            year = random.choice(range(7, 11))
 
-        newpupil = Pupil(first_name=first_name, last_name=random.choice(surnames),school=school,year=year)
+        newpupil = Pupil(first_name=first_name, last_name=random.choice(surnames), school=school, year=year)
         DB.session.add(newpupil)
-        DB.session.add(PupilInstrument(pupil=newpupil, instrument=instrument, grade=random.choice(range(1,8))))
+        DB.session.add(PupilInstrument(pupil=newpupil, instrument=instrument, grade=random.choice(range(1, 8))))
     
     DB.session.commit()
 
