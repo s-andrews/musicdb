@@ -20,3 +20,10 @@ def pupils():
 
     return render_template('pupils.html', pupils=pupils)
 
+
+@APP.route('/schools')
+def schools():
+
+    schools = School.query.all()
+
+    return render_template('schools.html', schools=schools)
