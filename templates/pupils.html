@@ -19,7 +19,7 @@
             <td>{{pupil.year}}</td>
             <td>
                 {% for instrument in pupil.instruments %}
-                    <span data-toggle="tooltip" title="Grade {{instrument.grade}}">{{instrument.instrument.name}}</span>
+                    <span data-toggle="tooltip" title="{% if instrument.grade %}Grade {{instrument.grade}} {% endif %} {% if instrument.teacher %}Teacher {{instrument.teacher.first_name}} {{instrument.teacher.last_name}}{% endif %}">{{instrument.instrument.name}}</span>
                 {% endfor %}
             </td>
         </tr>

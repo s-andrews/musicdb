@@ -53,10 +53,21 @@ class PupilInstrument(DB.Model):
     pupil_id = DB.Column(DB.Integer, DB.ForeignKey('pupils.id'))
     insrument_id = DB.Column(DB.Integer, DB.ForeignKey('instruments.id'))
     grade = DB.Column(DB.Integer)
-
+    teacher_id = DB.Column(DB.Integer, DB.ForeignKey('teachers.id'))
+    
     pupil = DB.relationship('Pupil',backref='instruments')
     instrument = DB.relationship('Instrument',backref='pupils')
+    teacher = DB.relationship('Teacher',backref='pupils')
 
     def __repr__(self):
         return f"{self.pupil} {self.instrument.name}"
+
+
+class Teacher(DB.Model):
+    __tablename__ = 'teachers'
+    id = DB.Column(DB.Integer, primary_key=True)
+    first_name = DB.Column(DB.String)
+    last_name = DB.Column(DB.String)
+    region = DB.Column(DB.String)
+
 

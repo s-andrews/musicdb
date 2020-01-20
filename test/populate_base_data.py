@@ -3,7 +3,7 @@ import sys
 sys.path.append("..")
 
 from musicdb import APP
-from datamodel import DB, School, SchoolStages, Pupil, Instrument, InstrumentFamilies, PupilInstrument
+from datamodel import DB, School, SchoolStages, Pupil, Instrument, InstrumentFamilies, PupilInstrument, Teacher
 
 def populate_database():
 
@@ -80,22 +80,27 @@ def populate_database():
         print(f"\t {instrument}")
 
 
+    # Make some teachers
+    sally = Teacher(first_name="Sally", last_name="Gogna", region="Grafham")
+    maria = Teacher(first_name="Maria", last_name="MxElroy", region="Comberton")
+    mark = Teacher(first_name="Mark", last_name="Aldous", region="Cambridge")
+
     # Try adding an instrument to a pupil
     
 
     DB.session.add(PupilInstrument(pupil=simon, instrument=saxophone, grade=6))
-    DB.session.add(PupilInstrument(pupil=simon, instrument=piano, grade=1))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=piano, grade=1, teacher=maria))
     DB.session.add(PupilInstrument(pupil=simon, instrument=clarinet, grade=6))
     DB.session.add(PupilInstrument(pupil=simon, instrument=flute))
 
     DB.session.add(PupilInstrument(pupil=emma, instrument=piano, grade=8))
-    DB.session.add(PupilInstrument(pupil=emma, instrument=flute, grade=8))
+    DB.session.add(PupilInstrument(pupil=emma, instrument=flute, grade=8, teacher=sally))
     DB.session.add(PupilInstrument(pupil=emma, instrument=tenorhorn, grade=1))
 
     DB.session.add(PupilInstrument(pupil=libby, instrument=trombone, grade=1))
 
-    DB.session.add(PupilInstrument(pupil=james, instrument=drums, grade=5))
-    DB.session.add(PupilInstrument(pupil=james, instrument=tuned_percussion, grade=5))
+    DB.session.add(PupilInstrument(pupil=james, instrument=drums, grade=5, teacher=mark))
+    DB.session.add(PupilInstrument(pupil=james, instrument=tuned_percussion, grade=5, teacher=mark))
 
 
 
