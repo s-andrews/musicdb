@@ -1,0 +1,22 @@
+{% extends "table.html" %}
+
+{% block tablebody %}
+    <thead>
+        <th>Name</th>
+        <th>Region</th>
+        <th>Pupils</th>
+    </thead>
+    <tbody>
+        {% for teacher in teachers %}
+        {% if teacher.pupils %}
+        <tr>
+        {% else %}
+        <tr class="warning">
+        {% endif %}
+            <td>{{teacher.first_name}} {{teacher.last_name}}</td>
+            <td>{{teacher.region}}</td>
+            <td>{{teacher.pupils|length}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>    
+{% endblock %}

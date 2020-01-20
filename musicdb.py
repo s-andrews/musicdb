@@ -20,6 +20,14 @@ def pupils():
 
     return render_template('pupils.html', pupils=pupils, table_title="Pupils")
 
+@APP.route('/pupil/<id>')
+def pupil(id):
+
+    pupil = Pupil.query.get(id)
+
+    return render_template('pupil.html', pupil=pupil, entry_title="Pupil")
+
+
 
 @APP.route('/schools')
 def schools():

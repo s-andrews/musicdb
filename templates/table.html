@@ -17,12 +17,20 @@
 
         <script>
             $().ready(function(){
+                // Make the resultTable dynamic using the DataTables jquery plugin
                 $('#resultTable').DataTable(
                     {
                     "paging": false
                     }
                 );
+
+                // Enable the tooltip elements
                 $('[data-toggle="tooltip"]').tooltip();
+
+                // Look for URLs in table rows and react to them being clicked
+                $(".clickable-row").click(function() {
+                     window.location = $(this).data("href");
+                });
             });
         </script>
     </div>

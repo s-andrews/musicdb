@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+
+            <h2>{{entry_title}}</h2>
+                {% block entrybody %}
+
+                {% endblock %}
+            </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+{% endblock %}

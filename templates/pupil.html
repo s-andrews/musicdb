@@ -1,0 +1,16 @@
+{% extends "entry.html" %}
+
+{% block entrybody %}
+
+    <h3>{{pupil.first_name}} {{pupil.last_name}}</h3>
+
+
+    <p>School: {{pupil.school.name}}</p>
+    <p>Year: {{pupil.year}}</p>
+    <h4>Instruments</h4>
+    <ul>
+       {% for instrument in pupil.instruments %}
+            <li>{{instrument.instrument.name}} - Grade: {{instrument.grade}} - Teacher: {{instrument.teacher.first_name}} {{instrument.teacher.last_name}}</li>
+        {% endfor %}
+        </ul>
+{% endblock %}

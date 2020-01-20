@@ -9,11 +9,7 @@
     </thead>
     <tbody>
         {% for pupil in pupils %}
-        {% if pupil.instruments %}
-        <tr>
-        {% else %}
-        <tr class="warning">
-        {% endif %}
+        <tr {% if not pupil.instruments %}class="warning"{% endif %} class="clickable-row" data-href={{ url_for('pupil' , id=pupil.id )}}>
             <td>{{pupil.first_name}} {{pupil.last_name}}</td>
             <td>{{pupil.school.name}}</td>
             <td>{{pupil.year}}</td>
