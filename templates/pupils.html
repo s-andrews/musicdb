@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>Pupils</h2>
+
+<table class="table table-striped table-hover">
+    <th>Name</th>
+    <th>School</th>
+    <th>Year</th>
+    <th>Instrument(s)</th>
+
+    {% for pupil in pupils %}
+    {% if pupil.instruments.all() %}
+    <tr>
+    {% else %}
+    <tr class="warning">
+    {% endif %}
+        <td>{{pupil.first_name}} {{pupil.last_name}}</td>
+        <td>{{pupil.school.name}}</td>
+        <td>{{pupil.year}}</td>
+        <td>
+            {% for instrument in pupil.instruments.all() %}
+                {{instrument.name}}
+            {% endfor %}
+        </td>
+    </tr>
+    
+    {% endfor %}    
+</table>
+
+
+
+
+{% endblock %}
