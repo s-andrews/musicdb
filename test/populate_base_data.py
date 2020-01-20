@@ -55,10 +55,14 @@ def populate_database():
     saxophone = Instrument(name='saxophone', family=InstrumentFamilies.WOODWIND)
     trombone = Instrument(name='trombone', family=InstrumentFamilies.BRASS)
     drums = Instrument(name='drum kit', family=InstrumentFamilies.PERCUSSION)
+    tuned_percussion = Instrument(name='tuned percussion', family=InstrumentFamilies.PERCUSSION)
+    piano = Instrument(name='piano', family=InstrumentFamilies.PERCUSSION)
 
     DB.session.add(saxophone)
     DB.session.add(trombone)
     DB.session.add(drums)
+    DB.session.add(piano)
+    DB.session.add(tuned_percussion)
     
     DB.session.commit()
 
@@ -70,6 +74,9 @@ def populate_database():
 
     # Try adding an instrument to a pupil
     simon.instruments.append(saxophone)
+    james.instruments.append(drums)
+    james.instruments.append(tuned_percussion)
+    emma.instruments.append(piano)
 
     DB.session.add(simon)
 

@@ -28,3 +28,8 @@
     border-color: transparent;
     color: #fff !important;
   }
+
+  /* We need this to stop the pages overlapping the nav bar */
+  h2 {
+    padding-top: 2em;
+}

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-{% block header %}
+{% block toolbar %}
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -21,7 +21,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">MusicDB</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">MusicDB</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
@@ -33,7 +33,10 @@
         </ul>
       </div>
     </div>
-  </nav> 
+</nav> 
+{% endblock %}
+
+{% block header %}
 <div class="jumbotron text-center">
     <h1>MusicDB</h1>
     <p>A database of children who play musical instruments</p>
