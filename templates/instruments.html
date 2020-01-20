@@ -8,14 +8,14 @@
     </thead>
     <tbody>
         {% for instrument in instruments %}
-        {% if instrument.pupils.all() %}
+        {% if instrument.pupils %}
         <tr>
         {% else %}
         <tr class="warning">
         {% endif %}
             <td>{{instrument.name}}</td>
             <td>{{instrument.family.value}}</td>
-            <td>{{instrument.pupils.all()|length}}</td>
+            <td>{{instrument.pupils|length}}</td>
         </tr>
         {% endfor %}
     </tbody>    

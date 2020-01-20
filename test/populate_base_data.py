@@ -3,7 +3,7 @@ import sys
 sys.path.append("..")
 
 from musicdb import APP
-from datamodel import DB, School, SchoolStages, Pupil, Instrument, InstrumentFamilies
+from datamodel import DB, School, SchoolStages, Pupil, Instrument, InstrumentFamilies, PupilInstrument
 
 def populate_database():
 
@@ -53,7 +53,15 @@ def populate_database():
 
     # Add some instruments
     saxophone = Instrument(name='saxophone', family=InstrumentFamilies.WOODWIND)
+    flute = Instrument(name='flute', family=InstrumentFamilies.WOODWIND)
+    clarinet = Instrument(name='clarinet', family=InstrumentFamilies.WOODWIND)
     trombone = Instrument(name='trombone', family=InstrumentFamilies.BRASS)
+    trumpet = Instrument(name='trumpet', family=InstrumentFamilies.BRASS)
+    tenorhorn = Instrument(name='tenor horn', family=InstrumentFamilies.BRASS)
+    violin = Instrument(name='violin', family=InstrumentFamilies.STRINGS)
+    viola = Instrument(name='viola', family=InstrumentFamilies.STRINGS)
+    cello = Instrument(name='cello', family=InstrumentFamilies.STRINGS)
+    doublebass = Instrument(name='double bass', family=InstrumentFamilies.STRINGS)
     drums = Instrument(name='drum kit', family=InstrumentFamilies.PERCUSSION)
     tuned_percussion = Instrument(name='tuned percussion', family=InstrumentFamilies.PERCUSSION)
     piano = Instrument(name='piano', family=InstrumentFamilies.PERCUSSION)
@@ -73,19 +81,30 @@ def populate_database():
 
 
     # Try adding an instrument to a pupil
-    simon.instruments.append(saxophone)
-    james.instruments.append(drums)
-    james.instruments.append(tuned_percussion)
-    emma.instruments.append(piano)
+    
 
-    DB.session.add(simon)
+    DB.session.add(PupilInstrument(pupil=simon, instrument=saxophone, grade=6))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=piano, grade=1))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=clarinet, grade=6))
+    DB.session.add(PupilInstrument(pupil=simon, instrument=flute))
+
+    DB.session.add(PupilInstrument(pupil=emma, instrument=piano, grade=8))
+    DB.session.add(PupilInstrument(pupil=emma, instrument=flute, grade=8))
+    DB.session.add(PupilInstrument(pupil=emma, instrument=tenorhorn, grade=1))
+
+    DB.session.add(PupilInstrument(pupil=libby, instrument=trombone, grade=1))
+
+    DB.session.add(PupilInstrument(pupil=james, instrument=drums, grade=5))
+    DB.session.add(PupilInstrument(pupil=james, instrument=tuned_percussion, grade=5))
+
+
+
 
     DB.session.commit()
 
-    print(simon.instruments.all())
+    for instrument in simon.instruments:
+        print(instrument)
 
-
-    print (saxophone.pupils.all())
 
 if __name__ == '__main__':
     populate_database()

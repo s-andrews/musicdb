@@ -11,12 +11,6 @@ class Pupil(DB.Model):
     last_name = DB.Column(DB.String)
     year = DB.Column(DB.Integer)
     school_id = DB.Column(DB.Integer, DB.ForeignKey('schools.id'))
-    instruments = DB.relationship(
-        'Instrument',
-        secondary='pupil_instruments',
-        backref=DB.backref('pupils',lazy='dynamic'),
-        lazy='dynamic'
-    )
 
     def __repr__(self):
         return f"{self.first_name} {self.last_name} ({self.school.name}, year {self.year})"
@@ -53,9 +47,16 @@ class Instrument(DB.Model):
         return self.name
 
 
-PupilInstrument = DB.Table(
-    'pupil_instruments', 
-    DB.Column('pupil_id', DB.Integer, DB.ForeignKey('pupils.id')),
-    DB.Column('instrument_id', DB.Integer, DB.ForeignKey('instruments.id')),
-)
+class PupilInstrument(DB.Model):
+    __tablename__ = 'pupil_instruments'
+    id = DB.Column(DB.Integer, primary_key=True)
+    pupil_id = DB.Column(DB.Integer, DB.ForeignKey('pupils.id'))
+    insrument_id = DB.Column(DB.Integer, DB.ForeignKey('instruments.id'))
+    grade = DB.Column(DB.Integer)
+
+    pupil = DB.relationship('Pupil',backref='instruments')
+    instrument = DB.relationship('Instrument',backref='pupils')
+
+    def __repr__(self):
+        return f"{self.pupil} {self.instrument.name}"
 
