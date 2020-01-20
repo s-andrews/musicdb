@@ -1,19 +1,22 @@
 {% extends "table.html" %}
 
 {% block tablebody %}
-    <th>Name</th>
-    <th>Type</th>
-    <th>Pupils</th>
-
-    {% for school in schools %}
-    {% if school.pupils %}
-    <tr>
-    {% else %}
-    <tr class="warning">
-    {% endif %}
-        <td>{{school.name}}</td>
-        <td>{{school.stage.value}}</td>
-        <td>{{school.pupils|length}}</td>
-    </tr>
-    {% endfor %}    
+    <thead>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Pupils</th>
+    </thead>
+    <tbody>
+        {% for school in schools %}
+        {% if school.pupils %}
+        <tr>
+        {% else %}
+        <tr class="warning">
+        {% endif %}
+            <td>{{school.name}}</td>
+            <td>{{school.stage.value}}</td>
+            <td>{{school.pupils|length}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>    
 {% endblock %}
