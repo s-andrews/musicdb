@@ -17,7 +17,11 @@
 
         <script>
             $().ready(function(){
-                $('#resultTable').DataTable();
+                $('#resultTable').DataTable(
+                    {
+                    "paging": false
+                    }
+                );
             });
         </script>
     </div>
