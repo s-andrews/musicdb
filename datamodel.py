@@ -36,6 +36,7 @@ class InstrumentFamilies(enum.Enum):
     STRINGS = 'Strings'
     PERCUSSION = 'Percussion'
     BRASS = 'Brass'
+    KEYBOARD = 'Keyboards'
 
 class Instrument(DB.Model):
     __tablename__ = 'instruments'
