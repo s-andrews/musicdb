@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect
-from flask_login import LoginManager, login_required, login_user
+from flask import Flask, render_template, request, redirect, flash, url_for
+from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length
@@ -48,6 +48,13 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators = [DataRequired(), Length(1,64)])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log in')
+
+
+@APP.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @APP.route('/pupils')
 @login_required
