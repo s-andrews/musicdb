@@ -15,7 +15,7 @@
         {% endif %}
             <td>{{instrument.name}}</td>
             <td>{{instrument.family.value}}</td>
-            <td>{{instrument.pupils|length}}</td>
+            <td>{{instrument.player_count(current_user)}}</td>
         </tr>
         {% endfor %}
     </tbody>    

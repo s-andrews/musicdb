@@ -47,6 +47,21 @@ class Instrument(DB.Model):
     name = DB.Column(DB.String)
     family = DB.Column(DB.Enum(InstrumentFamilies))
 
+    def player_count(self,user):
+        """
+        Gives the number of players this user can see
+        That's everything for admins, or the number from
+        the relevant school for everyone else.
+        """
+        if user.role == UserRole.ADMIN:
+            return len(self.pupils)
+        
+        else:
+            myschool = user.school
+            players = [p for p in self.pupils if p.pupil.school == myschool]
+
+            return len(players)
+
     def __repr__(self):
         return self.name
 

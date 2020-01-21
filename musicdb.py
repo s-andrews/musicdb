@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
-from flask_login import LoginManager, login_required, login_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length
@@ -18,7 +18,7 @@ APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/simon/musicdb.sqlite'
 APP.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 APP.config['SECRET_KEY'] = 'ThisIsASecret'
 
-from datamodel import School, Pupil, PupilInstrument, Instrument, Teacher, User
+from datamodel import School, Pupil, PupilInstrument, Instrument, Teacher, User, UserRole
 
 
 @APP.route('/')
@@ -60,7 +60,13 @@ def logout():
 @login_required
 def pupils():
 
-    pupils = Pupil.query.all()
+    pupils = None
+
+    if current_user.role == UserRole.ADMIN:
+        pupils = Pupil.query.all()
+    
+    else:
+        pupils = Pupil.query.filter_by(school=current_user.school).all()
 
     return render_template('pupils.html', pupils=pupils, table_title="Pupils")
 
@@ -78,7 +84,14 @@ def pupil(id):
 @login_required
 def schools():
 
-    schools = School.query.all()
+    schools = None
+
+    if current_user.role == UserRole.ADMIN:
+        schools = School.query.all()
+    
+    else:
+        schools = [current_user.school]
+
 
     return render_template('schools.html', schools=schools, table_title="Schools")
 
