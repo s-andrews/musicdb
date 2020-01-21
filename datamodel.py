@@ -89,6 +89,22 @@ class Teacher(DB.Model):
     last_name = DB.Column(DB.String)
     region = DB.Column(DB.String)
 
+    def pupil_count(self,user):
+        """
+        Gives the number of pupils for this teacher that this user can see
+        That's everything for admins, or the number from
+        the relevant school for everyone else.
+        """
+        if user.role == UserRole.ADMIN:
+            return len(self.pupils)
+        
+        else:
+            myschool = user.school
+            players = [p for p in self.pupils if p.pupil.school == myschool]
+
+            return len(players)
+
+
 
 class UserRole(enum.Enum):
     ADMIN = 'Global Administrator'
