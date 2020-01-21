@@ -40,3 +40,9 @@
 .clickable-row:hover {
   cursor: pointer;
 }
+
+/* Have some space for the login button */
+
+#loginbutton {
+  padding: 2em;
+}

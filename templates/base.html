@@ -85,6 +85,13 @@
             and identify opportunities for new teachers to approach schools to broaden the range of
             instrumental teaching they offer.
         </p>
+
+        {% if not current_user.is_authenticated %}
+
+          <p class="text-center" id="loginbutton">
+           <a class="btn btn-lg btn-warning" role="button" href={{ url_for('login') }}>Login to get started</a>
+         </p>
+         {% endif %}
     </div>
     <div class="col-sm-2"></div>
 </div>
