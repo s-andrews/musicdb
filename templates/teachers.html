@@ -15,7 +15,7 @@
         {% endif %}
             <td>{{teacher.first_name}} {{teacher.last_name}}</td>
             <td>{{teacher.region}}</td>
-            <td>{{teacher.pupils|length}}</td>
+            <td>{{teacher.pupil_count(current_user)}}</td>
         </tr>
         {% endfor %}
     </tbody>    
