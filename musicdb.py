@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length
 from flask_bootstrap import Bootstrap
 
@@ -18,7 +18,7 @@ APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/simon/musicdb.sqlite'
 APP.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 APP.config['SECRET_KEY'] = 'ThisIsASecret'
 
-from datamodel import School, Pupil, PupilInstrument, Instrument, Teacher, User, UserRole
+from datamodel import School, Pupil, PupilInstrument, Instrument, Teacher, User, UserRole, DB
 
 
 @APP.route('/')
@@ -77,6 +77,51 @@ def pupil(id):
     pupil = Pupil.query.get(id)
 
     return render_template('pupil.html', pupil=pupil, entry_title="Pupil")
+
+
+class PupilForm(FlaskForm):
+    first_name = StringField("First Name", validators=[DataRequired()])
+    last_name = StringField("Last Name", validators=[DataRequired()])
+    year = IntegerField("Year", validators=[DataRequired()])
+    school = SelectField("School",choices=[(s.id, s.name) for s in School.query.order_by('name')], coerce=int)
+    submit = SubmitField('Submit Information')
+
+
+@APP.route('/editpupil/', methods = ['GET','POST'])
+@APP.route('/editpupil/<id>', methods = ['GET','POST'])
+@login_required
+def editpupil(id=None):
+
+    form = PupilForm()
+    if id is not None:
+        pupil = Pupil.query.filter_by(id=id).first()
+        form = PupilForm(obj=pupil)
+        # We need this to set the correct default for the school selector
+        form.school.data = pupil.school.id
+
+    if form.validate_on_submit():
+
+        pupil = None
+
+        if id is not None:
+            # We're editing an existing entry
+            pupil = Pupil.query.filter_by(id=id).first()
+            pupil.first_name = form.first_name.data
+            pupil.last_name = form.last_name.data
+            pupil.year = form.year.data
+            pupil.school = School.query.filter_by(id=int(form.school.data)).first()
+
+        else:
+            pupil = Pupil(first_name=form.first_name.data, last_name=form.last_name.data, year=form.year.data, school=School.query.filter_by(id=int(form.school.data)).first())
+
+        DB.session.add(pupil)
+        DB.session.commit()
+    
+        return redirect(url_for('index'))
+
+
+    return render_template("editpupil.html", form=form, entry_title="Add/Edit Pupil")
+
 
 
 
