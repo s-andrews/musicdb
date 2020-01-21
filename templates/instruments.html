@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         {% for instrument in instruments %}
-        {% if instrument.pupils %}
+        {% if instrument.player_count(current_user) > 0 %}
         <tr>
         {% else %}
         <tr class="warning">

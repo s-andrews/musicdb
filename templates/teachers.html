@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         {% for teacher in teachers %}
-        {% if teacher.pupils %}
+        {% if teacher.pupil_count(current_user) > 0 %}
         <tr>
         {% else %}
         <tr class="warning">
