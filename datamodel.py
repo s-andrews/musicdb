@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from musicdb import APP
 import enum
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 DB = SQLAlchemy(APP)
 
@@ -27,6 +29,7 @@ class School(DB.Model):
     name = DB.Column(DB.String)
     stage = DB.Column(DB.Enum(SchoolStages))
     pupils = DB.relationship('Pupil', backref='school')
+    users = DB.relationship('User', backref='school')
 
     def __repr__(self):
         return self.name
@@ -70,3 +73,29 @@ class Teacher(DB.Model):
     first_name = DB.Column(DB.String)
     last_name = DB.Column(DB.String)
     region = DB.Column(DB.String)
+
+
+class UserRole(enum.Enum):
+    ADMIN = 'Global Administrator'
+    SINGLE_SCHOOL_RW = 'Admin for one school'
+    SINGLE_SCHOOL_RO = 'Allowed to view one school'
+    ALL_SCHOOL_RO = 'Allowed to view all schools'
+
+class User(UserMixin, DB.Model):
+    __tablename__ = 'users'
+    id = DB.Column(DB.Integer, primary_key=True)
+    username = DB.Column(DB.String(128), unique=True, index=True)
+    role = DB.Column(DB.Enum(UserRole))
+    school_id = DB.Column(DB.Integer, DB.ForeignKey('schools.id'))
+    password_hash = DB.Column(DB.String(128))
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)

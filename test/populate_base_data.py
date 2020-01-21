@@ -4,7 +4,7 @@ sys.path.append("..")
 import random
 
 from musicdb import APP
-from datamodel import DB, School, SchoolStages, Pupil, Instrument, InstrumentFamilies, PupilInstrument, Teacher
+from datamodel import DB, School, SchoolStages, Pupil, Instrument, InstrumentFamilies, PupilInstrument, Teacher, User, UserRole
 
 def populate_database():
 
@@ -338,7 +338,23 @@ def randomly_populate():
     DB.session.commit()
 
 
+def add_users():
+    admin = User(username='admin', role=UserRole.ADMIN, school=School.query.filter_by(name="Swaffham Prior Primary").first())
+    admin.password = "admin123"
+
+    prior_admin = User(username='prior_admin', role=UserRole.SINGLE_SCHOOL_RW, school=School.query.filter_by(name="Swaffham Prior Primary").first())
+    prior_admin.password = "prior123"
+
+    bulbeck_ro = User(username='bulbeck_ro', role=UserRole.SINGLE_SCHOOL_RO, school=School.query.filter_by(name="Swaffham Bulbeck Primary").first())
+    bulbeck_ro.password = "bulbeck123"
+
+    DB.session.add(prior_admin)
+    DB.session.add(bulbeck_ro)
+    DB.session.add(admin)
+
+    DB.session.commit()
 
 if __name__ == '__main__':
     populate_database()
+    add_users()
     randomly_populate()
