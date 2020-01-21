@@ -32,6 +32,9 @@
             <li><a href="{{ url_for('schools') }}">Schools</a></li>
           <li><a href="{{ url_for('teachers') }}">Teachers</a></li>
           <li><a href="{{ url_for('instruments') }}">Instruments</a></li>
+          {% if current_user.is_authenticated and current_user.is_admin() %}
+              <li><a href="{{ url_for('users') }}">Users</a></li>
+          {% endif %}
           {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('logout') }}">Log Out {{ current_user.username }} ({{ current_user.role.value }})</a></li>
           {% else %}

@@ -112,3 +112,17 @@ def teachers():
     teachers = Teacher.query.all()
 
     return render_template('teachers.html', teachers=teachers, table_title="Teachers")
+
+
+@APP.route('/users')
+@login_required
+def users():
+
+    # Only admins can use this
+    if not current_user.is_admin():
+        return redirect(url_for('index'))
+
+    users = User.query.all()
+
+    return render_template('users.html', users=users, table_title="Users")
+

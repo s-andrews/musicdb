@@ -130,3 +130,6 @@ class User(UserMixin, DB.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def is_admin(self):
+        return self.role == UserRole.ADMIN
