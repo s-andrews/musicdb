@@ -84,7 +84,7 @@ class PupilForm(FlaskForm):
     last_name = StringField("Last Name", validators=[DataRequired()])
     year = IntegerField("Year", validators=[DataRequired()])
     school = SelectField("School",choices=[(s.id, s.name) for s in School.query.order_by('name')], coerce=int)
-    submit = SubmitField('Submit Information')
+    submit = SubmitField('Submit Pupil Information')
 
 
 @APP.route('/editpupil/', methods = ['GET','POST'])
@@ -117,7 +117,7 @@ def editpupil(id=None):
         DB.session.add(pupil)
         DB.session.commit()
     
-        return redirect(url_for('index'))
+        return redirect(url_for('pupil',id=pupil.id))
 
 
     return render_template("editpupil.html", form=form, entry_title="Add/Edit Pupil")
