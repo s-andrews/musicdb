@@ -12,5 +12,8 @@
        {% for instrument in pupil.instruments %}
             <li>{{instrument.instrument.name}} - Grade: {{instrument.grade}} - Teacher: {{instrument.teacher.first_name}} {{instrument.teacher.last_name}}</li>
         {% endfor %}
-        </ul>
+    </ul>
+
+    <a class="btn btn-lg btn-success" role="button" href={{ url_for('editpupil',id=pupil.id) }}>Edit pupil</a>
+
 {% endblock %}
