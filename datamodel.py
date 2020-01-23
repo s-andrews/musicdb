@@ -133,3 +133,6 @@ class User(UserMixin, DB.Model):
 
     def is_admin(self):
         return self.role == UserRole.ADMIN
+
+    def can_edit(self):
+        return self.role in [UserRole.ADMIN, UserRole.SINGLE_SCHOOL_RW]

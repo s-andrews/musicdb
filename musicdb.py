@@ -92,6 +92,9 @@ class PupilForm(FlaskForm):
 @login_required
 def editpupil(id=None):
 
+    # This isn't available to ro users
+    assert current_user.can_edit()
+        
     form = PupilForm()
     if id is not None:
         pupil = Pupil.query.filter_by(id=id).first()
@@ -109,6 +112,7 @@ def editpupil(id=None):
             pupil.first_name = form.first_name.data
             pupil.last_name = form.last_name.data
             pupil.year = form.year.data
+            # TODO: Check that this user can assign to this school
             pupil.school = School.query.filter_by(id=int(form.school.data)).first()
 
         else:

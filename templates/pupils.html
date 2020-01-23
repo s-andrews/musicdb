@@ -26,7 +26,9 @@
 
 
 {% block posttable %}
+{% if current_user.can_edit() %}
 <div class="bottomright">
     <a class="btn btn-lg btn-success" role="button" href={{ url_for('editpupil') }}>Add pupil</a>
 </div>
+{% endif %}
 {% endblock %}
