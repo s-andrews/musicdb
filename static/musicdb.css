@@ -46,3 +46,10 @@
 #loginbutton {
   padding: 2em;
 }
+
+/* Position the fixed 'add' buttons */
+.bottomright {
+  position: fixed;
+  bottom:2em;
+  right: 2em;
+}
